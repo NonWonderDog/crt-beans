@@ -1,0 +1,77 @@
+shaders = 9
+
+//======== Transform color space if necessary.
+shader0 = shaders/transform_ntsc.slang
+mipmap_input0 = false
+scale_type0 = source
+scale0 = 1.0
+float_framebuffer0 = true
+alias0 = PrePass0 
+
+shader1 = shaders/ntsc-pass1-famicom.slang
+filter_linear1 = false
+scale_type_x1 = source
+scale_type_y1 = source
+scale_x1 = 4.0
+scale_y1 = 1.0
+float_framebuffer1 = true
+alias1 = NPass1
+
+shader2 = ../crt/shaders/guest/advanced/ntsc/ntsc-pass2.slang
+filter_linear2 = true
+scale_type2 = source
+scale_x2 = 0.50
+scale_y2 = 1.00
+float_framebuffer2 = true
+
+shader3 = ../crt/shaders/guest/advanced/ntsc/ntsc-pass3.slang
+filter_linear3 = true
+scale_type3 = source
+scale_x3 = 1.0
+scale_y3 = 1.0
+
+shader4 = ../crt/shaders/guest/advanced/custom-fast-sharpen.slang
+filter_linear4 = true
+scale_type4 = source
+scale_x4 = 1.0
+scale_y4 = 1.0
+alias4 = NtscPass
+
+//======== convert to linear RGB
+shader5 = shaders/filter_ntsc.slang
+mipmap_input5 = false
+filter_linear5 = true
+scale_type_x5 = viewport
+scale_x5 = 0.5
+scale_type_y5 = source
+scale_y5 = 1.0
+float_framebuffer5 = true
+alias5 = "Filtered"
+
+//======== Draw the scanlines, handling interlacing.
+// We do the expensive width calculations in a separate pass so that we don't
+// need to duplicate them for every fragment in the next pass.
+shader6 = shaders/calculate_widths.slang
+mipmap_input6 = false
+scale_type6 = source
+scale6 = 1.0
+float_framebuffer6 = true
+
+shader7 = shaders/spot.slang
+filter_linear7 = false
+wrap_mode7 = clamp_to_border
+mipmap_input7 = false
+scale_type7 = viewport
+scale7 = 1.0
+float_framebuffer7 = true
+alias7 = "Scanlines"
+
+//======== Convert to sRGB.
+shader8 = shaders/composite_output_noglow.slang
+filter_linear8 = true
+wrap_mode8 = clamp_to_border
+mipmap_input8 = false
+scale_type8 = viewport
+scale8 = 1.0
+
+ReferenceLines = "240"
