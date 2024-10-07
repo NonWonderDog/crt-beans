@@ -53,7 +53,7 @@ void main() {
     float upper_sample_y, lower_sample_y;
     // Distance units are *scanlines heights*. delta is the distance between
     // samples on the x-axis, and has to be adjusted by the aspect ratio.
-    // Overescan changes the aspect ratio and needs to be taken into account.
+    // Overscan changes the aspect ratio and needs to be taken into account.
     float delta, upper_distance_y;
     // Check if we should be interlacing. If we are, grab two closest even or
     // odd lines. If we aren't, just grab the two closest lines.
