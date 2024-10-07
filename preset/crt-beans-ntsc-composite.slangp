@@ -1,0 +1,18 @@
+#reference "../slang-shaders/crt-simple-ntsc.slangp"
+
+ReferenceLines = "240"
+
+ntsc_taps = "16"
+cust_artifacting = "1.0"
+cust_fringing = "0.5"
+ntsc_fields = "0"
+ntsc_phase = "2"
+ntsc_sharp = "0.0"
+ntsc_cscale = "1.5"
+
+MaxSpotSize = "0.95"
+MinSpotSize = "0.50"
+
+MaskType = "1"
+MaskMin = "0.65"
+MaskMax = "0.85"

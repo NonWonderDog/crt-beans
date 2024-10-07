@@ -1,0 +1,16 @@
+#reference "../slang-shaders/crt-simple.slangp"
+
+ReferenceLines = "512"
+InputSpace = "2"
+
+InterMode = "2"
+InterSize = "240"
+
+Cutoff = "6.0"
+MaxSpotSize = "1.00"
+MinSpotSize = "0.50"
+
+MaskType = "0"
+MaskStagger = "1"
+MaskMin = "0.70"
+MaskMax = "0.95"
