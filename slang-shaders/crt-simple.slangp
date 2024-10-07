@@ -1,0 +1,46 @@
+shaders = 5
+
+//======== Transform color space if necessary.
+shader0 = shaders/transform.slang
+mipmap_input0 = false
+scale_type0 = source
+scale0 = 1.0
+float_framebuffer0 = true
+
+//======== Low-pass filter and sample to simulate an analog signal.
+// Also, convert to linear RGB for the next pass.
+shader1 = shaders/filter.slang
+alias1 = "Filtered"
+mipmap_input1 = false
+filter_linear1 = true
+scale_type_x1 = viewport
+scale_x1 = 0.5
+scale_type_y1 = source
+scale_y1 = 1.0
+float_framebuffer1 = true
+
+//======== Draw the scanlines, handling interlacing.
+// We do the expensive width calculations in a separate pass so that we don't
+// need to duplicate them for every fragment in the next pass.
+shader2 = shaders/calculate_widths.slang
+mipmap_input2 = false
+scale_type2 = source
+scale2 = 1.0
+float_framebuffer2 = true
+
+shader3 = shaders/spot.slang
+filter_linear3 = false
+alias3 = "Scanlines"
+wrap_mode3 = clamp_to_border
+mipmap_input3 = false
+scale_type3 = viewport
+scale3 = 1.0
+float_framebuffer3 = true
+
+//======== Convert to sRGB.
+shader4 = shaders/composite_output_noglow.slang
+filter_linear4 = true
+wrap_mode4 = clamp_to_border
+mipmap_input4 = false
+scale_type4 = viewport
+scale4 = 1.0
